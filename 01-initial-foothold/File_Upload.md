@@ -8,8 +8,14 @@
 
 ## Bypass filter ekstensi
 ```text
-shell.php   shell.phtml   shell.php5   shell.phar
-shell.php.jpg   shell.jpg.php   shell.pHp   shell.php%00.jpg
+shell.php
+shell.phtml
+shell.php5
+shell.phar
+shell.php.jpg
+shell.jpg.php
+shell.pHp
+shell.php%00.jpg
 ```
 
 ## Bypass Content-Type
