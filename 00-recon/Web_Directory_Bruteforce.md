@@ -48,7 +48,7 @@ dirb http://<TARGET>:PORT/ /usr/share/wordlists/dirb/common.txt
 # Wordlist langsung ditaruh setelah URL
 
 # Scan khusus mencari file PHP, TXT, dan ZIP
-dirb http://10.10.10.6:8000/ /usr/share/dirb/wordlists/common.txt -X .php,.txt,.zip -r
+dirb http://10.10.10.6:8000/ /usr/share/dirb/wordlists/common.txt -X .php,.html,.aspx,.jsp,.js,.txt,.zip -r
 # -X: Extension file yang ingin dicari
 # -r: Recursive scan
 
