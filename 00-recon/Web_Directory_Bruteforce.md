@@ -17,3 +17,18 @@ dirb http://<TARGET>:PORT/ /usr/share/wordlists/dirb/common.txt              # P
 
 # Ffuf (Sangat cepat dan fleksibel)
 ffuf -u http://<TARGET>:PORT/FUZZ -w /usr/share/wordlists/dirb/common.txt    # -w: Wordlist. Kata 'FUZZ' pada URL akan otomatis diganti dengan isi wordlist.
+```
+# WORDLIST DEFAULT KALI LINUX (Siap Pakai)
+```bash
+# Dirb (Cocok untuk scan cepat karena ukurannya kecil)
+/usr/share/wordlists/dirb/common.txt                          # Paling sering dipakai untuk cek awal.
+/usr/share/wordlists/dirb/big.txt                             # Lebih lengkap dari common.txt.
+
+# Dirbuster (Sangat direkomendasikan & menjadi standar untuk CTF)
+/usr/share/wordlists/dirbuster/directory-list-2.3-small.txt   # Ukuran sedang, efisien.
+/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt  # Sangat lengkap (Standar de-facto).
+
+# CATATAN: 
+Jika file Dirbuster tidak ditemukan/masih dikompresi (.gz), ekstrak dulu dengan perintah:
+sudo gzip -d /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt.gz
+```
