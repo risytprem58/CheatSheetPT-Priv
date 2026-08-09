@@ -4,7 +4,7 @@
 dirsearch -u http://<TARGET>:PORT/
 feroxbuster -u http://<TARGET>:PORT/ -w /usr/share/wordlists/dirb/common.txt
 dirb http://<TARGET>:PORT/ /usr/share/wordlists/dirb/common.txt
-```
+
 # Dirsearch 
 dirsearch -u http://<TARGET>:PORT/                                           # Scan default bawaan dirsearch.
 dirsearch -u http://<TARGET>:PORT/ -w /path/to/wordlist.txt                  # -w: Menambahkan custom wordlist pilihanmu.
