@@ -1,5 +1,6 @@
 # Network Discovery
 
+```bash
 # temukan target di NAT Network
 sudo netdiscover -r 10.0.2.0/24  # -r (Range): Menentukan rentang spesifik (subnet). Contoh: 10.0.2.0/24
 nmap -sn 10.0.2.0/24             # -sn: Deteksi host aktif saja tanpa memindai port (lebih cepat).
