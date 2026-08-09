@@ -1,20 +1,32 @@
 # Manual Enumeration (Quick Wins)
 
+Enumerasi manual digunakan untuk mencari konfigurasi, permission, service,
+dan informasi lain yang berpotensi membantu **Linux Privilege Escalation**.
+
 ```bash
 id; sudo -l                                  # privilege + sudo rights
-uname -a; cat /etc/os-release                # kernel + OS (untuk kernel exploit)
+uname -a; cat /etc/os-release                # kernel + OS
 find / -perm -4000 -type f 2>/dev/null       # SUID
 find / -perm -2000 -type f 2>/dev/null       # SGID
 getcap -r / 2>/dev/null                      # capabilities
 cat /etc/crontab; ls -la /etc/cron.d/        # cron jobs
-find / -writable -type f 2>/dev/null | grep -v proc   # writable files
+find / -writable -type f 2>/dev/null | grep -v proc  # writable files
 ls -la /home/*; cat ~/.bash_history          # info bocor
 ss -tlnp                                     # service internal
 ```
-# Manual Enumeration (Quick Wins)
 
-Enumerasi manual digunakan untuk mencari konfigurasi, permission, service,
-dan informasi lain yang berpotensi membantu **Linux Privilege Escalation**.
+**Keterangan singkat:**
+
+```text
+id / sudo -l       → Cek privilege dan hak sudo
+uname / os-release → Cek kernel dan versi OS
+SUID / SGID        → Cari binary dengan permission khusus
+getcap             → Cari Linux capabilities
+cron               → Cek scheduled jobs
+writable files     → Cari file yang dapat dimodifikasi
+home/history       → Cari informasi atau credential yang bocor
+ss                 → Cek service/port yang sedang listening
+```
 
 ## Basic Information
 
@@ -112,23 +124,6 @@ cat ~/.bash_history
 ss -tlnp
 # Menampilkan TCP port yang sedang listening
 # Membantu menemukan service yang hanya tersedia secara lokal
-```
-
-## Quick Checklist
-
-```text
-[ ] id
-[ ] sudo -l
-[ ] uname -a
-[ ] /etc/os-release
-[ ] SUID
-[ ] SGID
-[ ] Capabilities
-[ ] Cron Jobs
-[ ] Writable Files
-[ ] Home Directory
-[ ] Bash History
-[ ] Internal Services
 ```
 
 ## Alur Enumeration
