@@ -18,7 +18,7 @@ dirb http://<TARGET>:PORT/ /usr/share/wordlists/dirb/common.txt              # P
 # Ffuf (Sangat cepat dan fleksibel)
 ffuf -u http://<TARGET>:PORT/FUZZ -w /usr/share/wordlists/dirb/common.txt    # -w: Wordlist. Kata 'FUZZ' pada URL akan otomatis diganti dengan isi wordlist.
 ```
-# WORDLIST DEFAULT KALI LINUX (Siap Pakai)
+# Wordlist Default Kali Linux (Siap Pakai)
 ```bash
 # Dirb (Cocok untuk scan cepat karena ukurannya kecil)
 /usr/share/wordlists/dirb/common.txt                          # Paling sering dipakai untuk cek awal.
