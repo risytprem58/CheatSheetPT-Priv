@@ -1,5 +1,5 @@
 
-# Local Privilege Escalation (LPE) Guide: Dirty Frag
+# Local Privilege Escalation (LPE) Guide: Dirty Frag CVE-2026-43284 dan CVE-2026-43500
 
 Panduan praktis untuk melakukan eskalasi hak akses dari user terbatas (seperti `www-data` atau user biasa) menjadi `root` menggunakan celah kernel **Dirty Frag**.
 
