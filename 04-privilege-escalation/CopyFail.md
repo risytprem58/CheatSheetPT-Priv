@@ -1,4 +1,4 @@
-# CVE-2026-31431 — Copy Fail: Analysis & Lab Guide
+# CVE-2026-31431 — Copy Fail (CVE-2026-31431) : Analysis & Lab Guide
 
 > **Panduan praktis** untuk melakukan identifikasi kerentanan, simulasi eksploitasi (*Local Privilege Escalation*), dan verifikasi pasca-eksploitasi pada kernel Linux yang terdampak celah **Copy Fail** (`algif_aead` page cache overwrite).
 
