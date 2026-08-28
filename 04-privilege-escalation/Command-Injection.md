@@ -48,6 +48,7 @@ Untuk menghemat waktu, pemeriksaan seluruh dependensi dapat dijalankan sekaligus
 ```text
 127.0.0.1 ; for cmd in nc mkfifo python3 bash ; do echo "$cmd: $(which $cmd 2>&1)" ; done
 ```
+Jika path seperti /usr/bin/nc atau /usr/bin/python3 muncul, artinya tools tersebut dapat digunakan. 
 
 ---
 
